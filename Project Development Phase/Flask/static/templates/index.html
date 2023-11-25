@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye Disease Prediction</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    body {
+      background-image: url("data:image/jpeg;base64,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");
+      background-size: auto;
+      background-repeat: repeat;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #000;
+      padding: 10px 0;
+    }
+
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+
+    .main-heading {
+      font-size: 36px;
+      font-weight: bold;
+      color: #6559ef;
+      text-align: left;
+
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .col-sm-6.bd {
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      margin-top: 40px;
+    }
+    .text-justify {
+       text-align: justify;
+       text-justify: distribute;
+     }
+
+
+    .container {
+      max-width: 850px;
+      margin:  auto;
+    }
+
+    .image-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .img-preview {
+      width: 300px;
+      height: 300px;
+      border: 2px dashed #ccc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .img-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .prediction-button {
+      margin-bottom: 40px;
+    }
+
+    .loader {
+      display: none;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .result {
+      margin-top: 60px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">EyeTech.io </a>
+  </nav>
+  <div class="container">
+    <div id="content">
+      <div class="row">
+        <div class="col-sm-6 bd">
+          <h3 class="main-heading">Eye Disease Prediction</h3>
+          <p class="text-justify">
+            Eye diseases, if left undetected and untreated, can lead to severe vision impairment and even blindness. However, many eye conditions exhibit subtle symptoms in their early stages, making timely diagnosis challenging. Welcome to our Eye Disease Prediction System, driven by state-of-the-art deep learning technology. Our model excels at classifying various eye conditions, utilizing advanced neural networks for comprehensive analysis of medical images. It efficiently extracts crucial features and patterns through convolutional layers, ensuring precise predictions for the presence of eye diseases. Our system represents a breakthrough in medical image analysis, providing an essential tool for early diagnosis and enhanced patient care
+          </p>
+        </div>
+        <div class="col-sm-6 bd">
+          <h4 class="text-center">Upload Retina Image</h4>
+          <form action="http://localhost:5000/" id="upload-file" method="post" enctype="multipart/form-data">
+            <div class="text-center">
+              <label for="imageUpload" class="btn btn-primary">
+                Click to Upload Image
+                <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg" style="display: none;">
+              </label>
+            </div>
+          </form>
+          <div class="image-section">
+            <div class="img-preview" id="imagePreview">
+              <img src="#" alt="Preview Image">
+            </div>
+            <div class="text-center prediction-button">
+              <button type="button" class="btn btn-success" id="btn-predict" >Predict</button>
+            </div>
+            <div class="loader" style="display:none;"></div>
+            
+	    <div id="result" style="display: none;">
+  		<h5>Prediction Result:</h5>
+  		<p id="predictionResult" style="font-weight: bold; font-size: 24px; color: #1a1552;"></p> 
+	    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("imageUpload").addEventListener("change", function () {
+      var imgPreview = document.getElementById("imagePreview");
+      var predictButton = document.getElementById("predictButton");
+      var result = document.getElementById("result");
+
+      var file = this.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        imgPreview.innerHTML = '<img src="' + e.target.result + '" alt="Preview Image">';
+        predictButton.disabled = false;
+        result.style.display = "none";
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        imgPreview.innerHTML = '<img src="#" alt="Preview Image">';
+      }
+    });
+
+    document.getElementById("predictButton").addEventListener("click", function () {
+      var result = document.getElementById("result");
+      var predictionResult = document.getElementById("predictionResult");
+
+      result.style.display = "none";
+      predictionResult.innerText = "";
+
+      // Perform and update predictionResult innerText
+
+      // Simulating prediction with a delay of 2 seconds
+      setTimeout(function () {
+        result.style.display = "block";
+        predictionResult.innerText = "Diagnosis: Positive for Eye Disease";
+      }, 2000);
+
+    });
+  </script>
+
+</body>
+<footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript"></script>
+</footer>
+</html>
